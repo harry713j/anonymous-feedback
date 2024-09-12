@@ -75,7 +75,7 @@ function SignUpPage() {
         description: response.data.message,
       });
 
-      router.replace(`/verify-code/${username}`);
+      router.replace(`/verify/${username}`);
       setIsSubmitting(false);
     } catch (error) {
       console.log("Error in sign up", error);
