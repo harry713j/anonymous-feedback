@@ -86,7 +86,7 @@ function DashboardPage() {
 
     fetchMessages();
     fetchAcceptMessages();
-  }, [session, setValue, fetchMessages, fetchAcceptMessages, toast]);
+  }, [session, setValue, fetchMessages, fetchAcceptMessages]);
 
   const handleSwitchChange = async () => {
     try {
@@ -140,7 +140,7 @@ function DashboardPage() {
         <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
         <span
           onClick={() => router.push("/")}
-          className="text-sm text-blue-500 flex items-center group cursor-pointer"
+          className="text-sm text-blue-900 flex items-center group cursor-pointer"
         >
           <MoveLeft className="w-6 h-4 transition-transform duration-300 ease-linear group-hover:-translate-x-3 " />
           <p className="ml-1 group-hover:underline">Back to home</p>

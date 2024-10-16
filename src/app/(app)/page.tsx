@@ -64,7 +64,7 @@ export default function Home() {
           </button>
         </div>
       </main>
-      <footer className="text-center p-4 md:p-6 bg-gray-900 text-white/70">
+      <footer className="text-center text-sm p-4 md:p-6 bg-gray-900 text-white/50">
         © 2024 Anonymous Feedback. All rights reserved.
       </footer>
     </>

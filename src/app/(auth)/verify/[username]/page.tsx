@@ -15,11 +15,13 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { Loader2 } from "lucide-react";
 
 function VerifyCodePage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const params = useParams<{ username: string }>();
   const { toast } = useToast();
@@ -31,6 +33,7 @@ function VerifyCodePage() {
   });
 
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
+    setIsSubmitting(true);
     try {
       const response = await axios.post<ApiResponse>(`/api/verify-code`, {
         username: params.username,
@@ -41,7 +44,7 @@ function VerifyCodePage() {
         title: "Success!",
         description: response.data.message,
       });
-
+      setIsSubmitting(false);
       router.replace("/signin");
     } catch (error) {
       console.log("Error in verifying code", error);
@@ -51,6 +54,7 @@ function VerifyCodePage() {
         description: axiosError.response?.data.message,
         variant: "destructive",
       });
+      setIsSubmitting(false);
     }
   };
 
@@ -78,7 +82,15 @@ function VerifyCodePage() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                </>
+              ) : (
+                "Submit"
+              )}
+            </Button>
           </form>
         </Form>
       </div>
