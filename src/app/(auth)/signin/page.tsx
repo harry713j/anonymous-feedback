@@ -71,7 +71,7 @@ function SignInPage() {
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Welcome Back to True Feedback
+            Welcome Back to Anonymous Feedback
           </h1>
           <p className="mb-4">Sign in to continue your secret conversations</p>
         </div>
@@ -109,7 +109,7 @@ function SignInPage() {
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
-                "Signin"
+                "Sign In"
               )}
             </Button>
           </form>
@@ -117,7 +117,7 @@ function SignInPage() {
         <div className="text-center mt-4">
           <p>
             Don&apos;t have an account?{" "}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
+            <Link href="/signup" className="text-blue-600 hover:text-blue-800">
               Sign up
             </Link>
           </p>

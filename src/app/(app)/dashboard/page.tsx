@@ -88,8 +88,8 @@ function DashboardPage() {
 
   const handleSwitchChange = async () => {
     try {
-      const response = await axios.post<ApiResponse>("/api/get-messages", {
-        acceptMessages: !acceptMessages,
+      const response = await axios.post<ApiResponse>("/api/accept-messages", {
+        acceptingMessages: !acceptMessages,
       });
       setValue("acceptMessages", !acceptMessages);
       toast({
@@ -106,10 +106,23 @@ function DashboardPage() {
     }
   };
 
+  if (!session || !session.user) {
+    return (
+      <div className="min-h-screen w-full bg-white/30 flex justify-center items-center">
+        <div>
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </div>
+      </div>
+    ); // Prevents errors until session is available
+  }
+
   const { username } = session?.user as User;
 
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/c/${username}`;
+  const baseUrl =
+    typeof window !== "undefined"
+      ? `${window.location.protocol}//${window.location.host}`
+      : "";
+  const profileUrl = `${baseUrl}/u/${username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
@@ -136,14 +149,14 @@ function DashboardPage() {
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex items-center">
         <Switch
           {...register("acceptMessages")}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
         />
-        <span className="ml-2">
+        <span className="ml-2.5 text-[15px]">
           Accept Messages: {acceptMessages ? "On" : "Off"}
         </span>
       </div>

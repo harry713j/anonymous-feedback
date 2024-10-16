@@ -8,9 +8,7 @@ export async function POST(request: Request) {
 
   try {
     const { username, email, password } = await request.json();
-    // if there is an user whose username already there in db and it also a verified user then we will return
-    // if the username only there and not verified then we will update the user
-    // if nothing is there then we will create a new user
+
     const existingUserVerifiedByUsername = await UserModel.findOne({
       username,
       isVerified: true,

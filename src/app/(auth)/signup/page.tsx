@@ -123,12 +123,12 @@ function SignUpPage() {
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
                   <p
                     className={`text-sm ${
-                      usernameMessage === "Username is unique"
+                      usernameMessage === "Username is available"
                         ? "text-green-500"
                         : "text-red-500"
                     }`}
                   >
-                    test {usernameMessage}
+                    {usernameMessage}
                   </p>
                   <FormMessage />
                 </FormItem>
@@ -166,7 +166,7 @@ function SignUpPage() {
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
-                "Signup"
+                "Sign up"
               )}
             </Button>
           </form>
@@ -174,7 +174,7 @@ function SignUpPage() {
         <div className="text-center mt-4">
           <p>
             Already a member?{" "}
-            <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">
+            <Link href="/signin" className="text-blue-600 hover:text-blue-800">
               Sign in
             </Link>
           </p>

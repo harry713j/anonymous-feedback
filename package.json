@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.63",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
@@ -18,11 +19,12 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@react-email/components": "^0.0.24",
     "@react-email/render": "^1.0.1",
-    "ai": "^3.3.26",
+    "ai": "^3.4.8",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
     "lucide-react": "^0.438.0",
