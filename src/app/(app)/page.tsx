@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/carousel";
 import messages from "@/data/messages.json";
 import Autoplay from "embla-carousel-autoplay";
-import { Mail } from "lucide-react";
+import { Mail, MoveRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-800 text-white">
@@ -50,6 +52,17 @@ export default function Home() {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+        <div className="mt-4">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="flex items-center text-sm  group"
+          >
+            <p className="mr-2 opacity-50 transition-all duration-300 ease-linear underline  group-hover:opacity-85">
+              Go to Dashboard
+            </p>
+            <MoveRight className="w-7 h-4 opacity-50 transition duration-300 ease-linear group-hover:translate-x-3 group-hover:opacity-85" />
+          </button>
+        </div>
       </main>
       <footer className="text-center p-4 md:p-6 bg-gray-900 text-white/70">
         © 2024 Anonymous Feedback. All rights reserved.

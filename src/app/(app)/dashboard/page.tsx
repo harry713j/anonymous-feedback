@@ -9,11 +9,12 @@ import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { Loader2, RefreshCcw, MoveLeft } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 function DashboardPage() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -23,6 +24,7 @@ function DashboardPage() {
   const form = useForm({
     resolver: zodResolver(acceptMessageSchema),
   });
+  const router = useRouter();
 
   const { data: session } = useSession();
 
@@ -134,7 +136,16 @@ function DashboardPage() {
 
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+        <span
+          onClick={() => router.push("/")}
+          className="text-sm text-blue-500 flex items-center group cursor-pointer"
+        >
+          <MoveLeft className="w-6 h-4 transition-transform duration-300 ease-linear group-hover:-translate-x-3 " />
+          <p className="ml-1 group-hover:underline">Back to home</p>
+        </span>
+      </div>
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{" "}
