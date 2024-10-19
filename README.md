@@ -7,6 +7,7 @@ Anonymous Feedback is a web application where users can receive feedback from ot
 - Anonymous Feedback: Users can share a unique link to receive anonymous feedback from anyone.
 - User Authentication: Secure login and authentication using NextAuth.js.
 - Email Verification: Users are required to verify their email by entering a code sent to their email address.
+- Google Authentication: User also can authenticate with their google account
 - Beautiful UI: The app uses shadcn/ui components for a polished interface.
 
 ## Tech Stack
@@ -46,6 +47,8 @@ Create a `.env` file in the root of the project and add the following variables:
 MONGODB_URI = "Your mongodb connection string"
 RESEND_API_KEY = "Your resend Api key"
 NEXTAUTH_SECRET= "Any secrete value"
+GOOGLE_CLIENT_ID = "Your Google client Id"
+GOOGLE_CLIENT_SECRET = "Your Google client secret"
 ```
 
 5. Run the development server:
@@ -60,8 +63,9 @@ Open http://localhost:3000 in your browser.
 
 - Sign Up: Create an account using your email.
 - Verify Email: After signing up, you will receive a verification code. Enter it to verify your email address.
+- Google Sign In: Alternately sign in with the security of Google
 - Receive Feedback: Share your unique profile link with others to start receiving anonymous feedback.
-- View Feedback: Feedback is displayed in your dashboard, and you can respond to it if you choose.
+- View Feedback: Feedback is displayed in your dashboard.
 
 ## Contributions
 
