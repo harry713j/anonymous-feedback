@@ -13,7 +13,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,12 +21,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 function SignUpPage() {
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
   const debounced = useDebounceCallback(setUsername, 400);
   const { toast } = useToast();
   const router = useRouter();
@@ -90,9 +91,26 @@ function SignUpPage() {
     }
   };
 
+  const onClickGoogle = async () => {
+    setIsGoogleSubmitting(true);
+    const result = await signIn("google", {
+      callbackUrl: "/dashboard",
+    });
+
+    setIsGoogleSubmitting(false);
+
+    if (result?.error) {
+      toast({
+        title: "Error",
+        description: result.error,
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
             Join
@@ -160,7 +178,7 @@ function SignUpPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
@@ -171,6 +189,22 @@ function SignUpPage() {
             </Button>
           </form>
         </Form>
+
+        <div className="">
+          <p className="text-sm text-gray-500 text-center">Or</p>
+        </div>
+        <div>
+          <Button className="w-full" onClick={onClickGoogle}>
+            {isGoogleSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              </>
+            ) : (
+              "Sign up with Google"
+            )}
+          </Button>
+        </div>
+
         <div className="text-center mt-4">
           <p>
             Already a member?{" "}

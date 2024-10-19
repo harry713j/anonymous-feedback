@@ -22,6 +22,7 @@ import { signIn } from "next-auth/react";
 
 function SignInPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -42,8 +43,6 @@ function SignInPage() {
     });
 
     setIsSubmitting(false);
-
-    console.log("Result from next-auth: ", result);
 
     if (result?.error) {
       if (result.error === "CredentialsSignin") {
@@ -66,9 +65,26 @@ function SignInPage() {
     }
   };
 
+  const onClickGoogle = async () => {
+    setIsGoogleSubmitting(true);
+    const result = await signIn("google", {
+      callbackUrl: "/dashboard",
+    });
+
+    setIsGoogleSubmitting(false);
+
+    if (result?.error) {
+      toast({
+        title: "Error",
+        description: result.error,
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Welcome Back to Anonymous Feedback
@@ -103,7 +119,7 @@ function SignInPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
@@ -114,6 +130,22 @@ function SignInPage() {
             </Button>
           </form>
         </Form>
+
+        <div className="">
+          <p className="text-sm text-gray-500 text-center">Or</p>
+        </div>
+        <div>
+          <Button className="w-full" onClick={onClickGoogle}>
+            {isGoogleSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              </>
+            ) : (
+              "Sign in with Google"
+            )}
+          </Button>
+        </div>
+
         <div className="text-center mt-4">
           <p>
             Don&apos;t have an account?{" "}

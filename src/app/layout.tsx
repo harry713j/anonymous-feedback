@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/context/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const open = Open_Sans({ weight: "500", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Anonymous Feedback",
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={inter.className}>
+        <body className={open.className}>
           {children}
           <Toaster />
         </body>
